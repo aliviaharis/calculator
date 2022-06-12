@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="calc">
+        <div class="result">
+            <p id="result">0</p>
+        </div>
+
+        <div class="buttons">
+            <button>C</button>
+            <button>%</button>
+            <button>DEL</button>
+            <button>/</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>*</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>-</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>+</button>
+            <button>00</button>
+            <button>0</button>
+            <button>.</button>
+            <button class="equal">=</button>
+        </div>
+
+    <!--javascript file link html file-->
+    <script >
+        function getInputValue(){
+            let input = event.target.innerText
+            console.log(input);
+            printValue(input);
+        }
+
+        let buttons = document.getElementsByTagName('button');
+        console.log(buttons.length);
+        for(var i =0; i<buttons.length;i++){
+            buttons[i].setAttribute('onclick','getInputValue()');
+        }
+
+        function printValue(val){
+            let out = document.querySelector("#result");
+            let current = out.innerHTML;
+            if(out.innerHTML == "0"){
+                
+                if(val!= "C" && val!="DEL"){ 
+                out.innerHTML ="";
+                out.innerHTML += val;
+                }
+            } else {
+                if(val == "DEL" ){
+                    console.log(current[current.length-1]);
+                    out.innerText = current.slice(0,-1);
+                    if(out.innerHTML.length < 1){
+                        out.innerHTML = "0";
+                    }
+                }
+                if(val!= "C" && val!="DEL" && val!="="){ 
+                    out.innerHTML += val;
+                }
+                if(val =="="){
+                    let res = out.innerHTML;
+                    out.innerHTML = eval(res);
+                }
+                if(val == "C"){
+                    out.innerHTML = "0";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
